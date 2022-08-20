@@ -19,6 +19,10 @@ import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
+import { signUp } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc } from "@firebase/firestore";
+import { updateProfile } from "@firebase/auth";
 
 export default function Signup({ navigation }) {
   const [displayName, setDisplayName] = useState({ value: "", error: "" });
