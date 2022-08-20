@@ -10,6 +10,7 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
+import { signIn } from "../firebase";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
@@ -24,6 +25,7 @@ export default function Login({ navigation }) {
       return;
     }
     Keyboard.dismiss();
+    await signIn(email.value, password.value);
   }
 
   return (

@@ -13,12 +13,12 @@ import { initializeFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCH144KqQmtmOr8Z2tQb3fyFCbG46a1noc",
-  authDomain: "travelnet-82c4b.firebaseapp.com",
-  projectId: "travelnet-82c4b",
-  storageBucket: "travelnet-82c4b.appspot.com",
-  messagingSenderId: "945252896033",
-  appId: "1:945252896033:web:a9a15eb5f38c26b610c260",
+  apiKey: "AIzaSyAM7yYGvGNqHZvP6YIYhgMNwyfd16gLjAY",
+  authDomain: "vpnlite-18bcf.firebaseapp.com",
+  projectId: "vpnlite-18bcf",
+  storageBucket: "vpnlite-18bcf.appspot.com",
+  messagingSenderId: "256945524730",
+  appId: "1:256945524730:web:50984a32ddcb0d475d9e43",
 };
 
 // Initialize Firebase
