@@ -7,7 +7,9 @@ import {
   Text,
   Animated,
 } from "react-native";
-import { Block, Button, Utils } from "expo-ui-kit";
+import { Block, Utils } from "expo-ui-kit";
+import Button from "../components/Button";
+
 // import Animated from "react-native-reanimated";
 
 // constants
@@ -143,7 +145,7 @@ const Welcome = ({ navigation }) => {
   }
 
   return (
-    <Block safe>
+    <Block safe style={{ backgroundColor: "#fad860" }}>
       <Block center middle>
         {renderImages()}
       </Block>
@@ -151,19 +153,11 @@ const Welcome = ({ navigation }) => {
         {renderTexts()}
         {renderDots()}
         <Button
-          primary
-          theme={theme}
-          onPress={() => navigation.navigate("VPN")}
+          mode="contained"
+          onPress={() => navigation.navigate("Login")}
+          style={{ backgroundColor: "#f76b1c" }}
         >
-          <Text
-            center
-            white
-            caption
-            bold
-            margin={[SIZES.padding / 2, SIZES.padding * 2]}
-          >
-            GET STARTED
-          </Text>
+          Get Started!
         </Button>
       </Block>
     </Block>
