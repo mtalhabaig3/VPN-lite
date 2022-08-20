@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 // import screens
 import Welcome from "../screens/Welcome";
 import VPN from "../screens/VPN";
+import Signup from "../screens/Signup";
 import Login from "../screens/Login";
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ const Navigation = () => {
       >
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
 
         <Stack.Screen name="VPN" component={VPN} />
       </Stack.Navigator>
