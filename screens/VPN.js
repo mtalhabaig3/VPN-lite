@@ -36,7 +36,9 @@ export default class VPN extends Component {
     return (
       <Block flex={false} row center middle>
         <Image source={connection.icon} />
-        <Text margin={[0, 10, 0, 20]}>{connection.name}</Text>
+        <Text margin={[0, 10, 0, 20]} color="white" bold>
+          {connection.name}
+        </Text>
         <Image source={icons.dropdown} />
       </Block>
     );
@@ -140,7 +142,7 @@ export default class VPN extends Component {
               caption
               center
               bold
-              color={!connected ? "white" : "f76b1c"}
+              white={!connected}
               margin={[SIZES.padding / 2, 0]}
             >
               {connected ? "DISCONNECT" : "CONNECT NOW"}
@@ -185,5 +187,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.05,
     shadowRadius: SIZES.base / 2,
+    backgroundColor: "#f76b1c",
+    borderRadius: 50,
   },
 });
