@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Image, Modal, StyleSheet, ScrollView } from "react-native";
 import { Block, Button, Text, Utils } from "expo-ui-kit";
-
-// constants
+import BackButton from "../components/BackButton";
 import { images, theme, servers } from "../constants";
 const { icons } = images;
 
@@ -17,8 +16,8 @@ export default class VPN extends Component {
     show: false,
     automatic: {
       name: "Automatic",
-      icon: icons.automatic
-    }
+      icon: icons.automatic,
+    },
   };
 
   handleConnect() {
@@ -55,7 +54,7 @@ export default class VPN extends Component {
               Pick your Server
             </Text>
             <ScrollView>
-              {servers.map(item => {
+              {servers.map((item) => {
                 const isConnected = connection.name === item.name;
                 const isChecked = icons[isConnected ? "checked" : "unchecked"];
                 return (
@@ -91,7 +90,9 @@ export default class VPN extends Component {
     const { connected } = this.state;
 
     return (
-      <Block safe center space="between">
+      <Block safe center space="between" style={{ backgroundColor: "#fad860" }}>
+        {/* <BackButton goBack={() => navigation.goBack()} /> */}
+
         <Block flex={false} padding={[SIZES.h3, 0]}>
           <Text title semibold>
             VPN
@@ -128,14 +129,18 @@ export default class VPN extends Component {
           <Button
             theme={theme}
             outlined={connected}
-            style={[styles.connect, connected && styles.connected]}
+            style={[
+              styles.connect,
+              connected && styles.connected,
+              { backgroundColor: "#f76b1c" },
+            ]}
             onPress={() => this.handleConnect()}
           >
             <Text
               caption
               center
               bold
-              white={!connected}
+              color={!connected ? "white" : "f76b1c"}
               margin={[SIZES.padding / 2, 0]}
             >
               {connected ? "DISCONNECT" : "CONNECT NOW"}
@@ -156,29 +161,29 @@ export default class VPN extends Component {
 
 const styles = StyleSheet.create({
   connect: {
-    width: SIZES.width / 2
+    width: SIZES.width / 2,
   },
   connected: {
-    borderColor: COLORS.black
+    borderColor: COLORS.black,
   },
   image: {
     width: 180,
     height: 180,
-    marginVertical: 20
+    marginVertical: 20,
   },
   status: {
     width: SIZES.base,
     height: SIZES.base,
-    marginLeft: SIZES.small
+    marginLeft: SIZES.small,
   },
   servers: {
     width: SIZES.width,
     height: SIZES.base * 9,
     shadowOffset: {
       width: 0,
-      height: -5
+      height: -5,
     },
     shadowOpacity: 0.05,
-    shadowRadius: SIZES.base / 2
-  }
+    shadowRadius: SIZES.base / 2,
+  },
 });

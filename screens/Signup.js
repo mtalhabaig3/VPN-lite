@@ -42,6 +42,8 @@ export default function Signup({ navigation }) {
     }
     Keyboard.dismiss();
 
+    await signUp(email.value, password.value);
+
     const user = auth.currentUser;
 
     let name = displayName.value;
@@ -65,6 +67,7 @@ export default function Signup({ navigation }) {
       updateProfile(user, userData),
       setDoc(doc(db, "users", user.uid), { ...userData, uid: user.uid }),
     ]);
+    navigation.navigate("VPN");
   }
 
   return (

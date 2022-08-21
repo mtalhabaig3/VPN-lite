@@ -26,6 +26,7 @@ export default function Login({ navigation }) {
     }
     Keyboard.dismiss();
     await signIn(email.value, password.value);
+    navigation.navigate("VPN");
   }
 
   return (
