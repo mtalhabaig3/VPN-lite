@@ -3,36 +3,40 @@ import { icons } from "./images";
 const servers = [
   {
     name: "Automatic",
-    icon: icons.automatic
+    icon: icons.automatic,
   },
   {
     name: "New York, NY",
-    icon: icons.us
+    icon: icons.us,
   },
   {
     name: "London",
-    icon: icons.uk
+    icon: icons.uk,
   },
   {
     name: "Moscow",
-    icon: icons.russia
+    icon: icons.russia,
   },
   {
     name: "Sweden",
-    icon: icons.sweden
+    icon: icons.sweden,
   },
   {
     name: "Melbourne",
-    icon: icons.australia
+    icon: icons.australia,
   },
   {
     name: "New Delhi",
-    icon: icons.india
+    icon: icons.india,
   },
   {
     name: "Singapore",
-    icon: icons.singapore
-  }
+    icon: icons.singapore,
+  },
+  {
+    name: "Peshawar",
+    icon: icons.pakistan,
+  },
 ];
 
 export default servers;
