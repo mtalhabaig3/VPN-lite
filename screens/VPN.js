@@ -1,36 +1,36 @@
-import React, { Component } from "react";
-import { Image, Modal, StyleSheet, ScrollView } from "react-native";
+import React, { Component, useState } from "react";
+import { Image, Modal, StyleSheet, ScrollView, View } from "react-native";
 import { Block, Button, Text, Utils } from "expo-ui-kit";
 import BackButton from "../components/BackButton";
 import { images, theme, servers } from "../constants";
+import CircularProgress from "react-native-circular-progress-indicator";
+
 const { icons } = images;
 
 // theme
 const { rgba } = Utils;
 const { SIZES, COLORS } = theme;
 
-export default class VPN extends Component {
-  state = {
-    connected: false,
-    server: null,
-    show: false,
-    automatic: {
-      name: "Automatic",
-      icon: icons.automatic,
-    },
-  };
+const VPN = () => {
+  const [connected, setConnected] = useState(false);
+  const [server, setServer] = useState(false);
+  const [show, setShow] = useState(false);
+  const [automatic, setAutomatic] = useState({
+    name: "Automatic",
+    icon: icons.automatic,
+  });
 
-  handleConnect() {
-    const { connected } = this.state;
-    this.setState({ connected: !connected });
+  function handleConnect() {
+    setConnected(!connected);
   }
 
-  handleServer(server) {
-    this.setState({ server, connected: false, show: false });
+  function handleServer(server) {
+    setServer(server);
+    setConnected(false);
+    setShow(false);
   }
 
-  renderServer() {
-    const { server, automatic } = this.state;
+  function renderServer() {
     const connection = server || automatic;
 
     return (
@@ -44,8 +44,7 @@ export default class VPN extends Component {
     );
   }
 
-  renderServers() {
-    const { show, server, automatic } = this.state;
+  function renderServers() {
     const connection = server || automatic;
 
     return (
@@ -63,7 +62,7 @@ export default class VPN extends Component {
                   <Button
                     transparent
                     key={`server-${item.name}`}
-                    onPress={() => this.handleServer(item)}
+                    onPress={() => handleServer(item)}
                   >
                     <Block
                       flex={false}
@@ -88,78 +87,89 @@ export default class VPN extends Component {
     );
   }
 
-  render() {
-    const { connected } = this.state;
-
-    return (
-      <Block safe center space="between" style={{ backgroundColor: "#fad860" }}>
-        {/* <BackButton goBack={() => navigation.goBack()} /> */}
-
-        <Block flex={false} padding={[SIZES.h3, 0]}>
-          <Text title semibold>
-            VPN
+  return (
+    <Block safe center space="between" style={{ backgroundColor: "#fad860" }}>
+      {/* <BackButton goBack={() => navigation.goBack()} /> */}
+      {!connected && (
+        <View style={{ position: "absolute", top: 347.5 }}>
+          <CircularProgress
+            radius={99}
+            value={100}
+            textColor="#222"
+            fontSize={20}
+            valueSuffix={"%"}
+            inActiveStrokeColor={"#2ecc71"}
+            inActiveStrokeOpacity={0.2}
+            inActiveStrokeWidth={6}
+            duration={3000}
+            onAnimationComplete={() => handleConnect()}
+          />
+        </View>
+      )}
+      <Block flex={false} padding={[SIZES.h3, 0]}>
+        <Text title semibold>
+          VPN
+        </Text>
+      </Block>
+      <Block center flex={false}>
+        <Block
+          flex={false}
+          row
+          center
+          middle
+          white
+          shadow
+          radius={SIZES.radius}
+          padding={[SIZES.base, SIZES.padding]}
+        >
+          <Text theme={theme} subtitle semibold gray height={SIZES.h3}>
+            {connected ? "Connected" : "Disconnected"}
           </Text>
-        </Block>
-
-        <Block center flex={false}>
           <Block
             flex={false}
-            row
-            center
-            middle
-            white
-            shadow
-            radius={SIZES.radius}
-            padding={[SIZES.base, SIZES.padding]}
-          >
-            <Text theme={theme} subtitle semibold gray height={SIZES.h3}>
-              {connected ? "Connected" : "Disconnected"}
-            </Text>
-            <Block
-              flex={false}
-              radius={SIZES.base}
-              style={styles.status}
-              color={connected ? COLORS.success : rgba(COLORS.gray, 0.5)}
-            />
-          </Block>
-
-          <Image
-            style={styles.image}
-            source={icons[connected ? "online" : "offline"]}
+            radius={SIZES.base}
+            style={styles.status}
+            color={connected ? COLORS.success : rgba(COLORS.gray, 0.5)}
           />
+        </Block>
 
-          <Button
-            theme={theme}
-            outlined={connected}
-            style={[
-              styles.connect,
-              connected && styles.connected,
-              { backgroundColor: "#f76b1c" },
-            ]}
-            onPress={() => this.handleConnect()}
+        <Image
+          style={styles.image}
+          source={icons[connected ? "online" : "offline"]}
+        />
+
+        <Button
+          theme={theme}
+          outlined={connected}
+          style={[
+            styles.connect,
+            connected && styles.connected,
+            { backgroundColor: "#f76b1c" },
+          ]}
+          onPress={() => handleConnect()}
+        >
+          <Text
+            caption
+            center
+            bold
+            white={!connected}
+            margin={[SIZES.padding / 2, 0]}
           >
-            <Text
-              caption
-              center
-              bold
-              white={!connected}
-              margin={[SIZES.padding / 2, 0]}
-            >
-              {connected ? "DISCONNECT" : "CONNECT NOW"}
-            </Text>
-          </Button>
-        </Block>
-
-        <Block flex={false} middle white shadow style={styles.servers}>
-          <Button transparent onPress={() => this.setState({ show: true })}>
-            {this.renderServer()}
-          </Button>
-        </Block>
-        {this.renderServers()}
+            {connected ? "DISCONNECT" : "CONNECT NOW"}
+          </Text>
+        </Button>
       </Block>
-    );
-  }
-}
+      <Block flex={false} middle white shadow style={styles.servers}>
+        <Button transparent onPress={() => setShow(true)}>
+          {renderServer()}
+        </Button>
+      </Block>
+      {renderServers()}
+    </Block>
+  );
+};
+
+export default VPN;
 
 const styles = StyleSheet.create({
   connect: {
