@@ -59,8 +59,14 @@ const VPN = ({ navigation }) => {
 
     return (
       <Modal visible={show} animationType="fade" transparent>
-        <Block bottom color={rgba(COLORS.gray, 0.2)}>
-          <Block flex={false} white middle padding={[SIZES.padding, 0]}>
+        <Block bottom color="#f76b1c">
+          <Block
+            flex={false}
+            white
+            middle
+            padding={[SIZES.padding, 0]}
+            color="#fad860"
+          >
             <Text subtitle center gray>
               Pick your Server
             </Text>
