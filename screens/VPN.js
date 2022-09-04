@@ -37,6 +37,7 @@ const VPN = ({ navigation }) => {
     setServer(server);
     setConnected(false);
     setShow(false);
+    setTemp(false);
   }
 
   function renderServer() {
