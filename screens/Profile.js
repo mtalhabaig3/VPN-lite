@@ -36,6 +36,7 @@ const Profile = ({ navigation }) => {
                   {
                     marginTop: 15,
                     marginBottom: 5,
+                    fontWeight: "600",
                   },
                 ]}
               >
@@ -51,19 +52,25 @@ const Profile = ({ navigation }) => {
               color="#f76b1c"
               size={20}
             />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>
+            <Text
+              style={{ color: "#777777", marginLeft: 20, fontWeight: "600" }}
+            >
               Peshawar, Pakistan
             </Text>
           </View>
           <View style={styles.row}>
             <MaterialCommunityIcons name="phone" color="#f76b1c" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>
+            <Text
+              style={{ color: "#777777", marginLeft: 20, fontWeight: "600" }}
+            >
               +92-1234567890
             </Text>
           </View>
           <View style={styles.row}>
             <MaterialCommunityIcons name="email" color="#f76b1c" size={20} />
-            <Text style={{ color: "#777777", marginLeft: 20 }}>
+            <Text
+              style={{ color: "#777777", marginLeft: 20, fontWeight: "600" }}
+            >
               {currentUser.email}
             </Text>
           </View>
