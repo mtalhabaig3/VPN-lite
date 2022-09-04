@@ -1,5 +1,12 @@
 import React, { Component, useState } from "react";
-import { Image, Modal, StyleSheet, ScrollView, View } from "react-native";
+import {
+  Image,
+  Modal,
+  StyleSheet,
+  ScrollView,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { Block, Button, Text, Utils } from "expo-ui-kit";
 import BackButton from "../components/BackButton";
 import { images, theme, servers } from "../constants";
@@ -11,7 +18,7 @@ const { icons } = images;
 const { rgba } = Utils;
 const { SIZES, COLORS } = theme;
 
-const VPN = () => {
+const VPN = ({ navigation }) => {
   const [connected, setConnected] = useState(false);
   const [server, setServer] = useState(false);
   const [show, setShow] = useState(false);
@@ -92,6 +99,15 @@ const VPN = () => {
   return (
     <Block safe center space="between" style={{ backgroundColor: "#fad860" }}>
       {/* <BackButton goBack={() => navigation.goBack()} /> */}
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Profile")}
+        style={{ position: "absolute", right: 20, top: 60 }}
+      >
+        <Image
+          style={styles.avatar}
+          source={require("../assets/Scared_man.jpeg")}
+        />
+      </TouchableOpacity>
       {loader && (
         <View style={{ position: "absolute", top: 347.5 }}>
           <CircularProgress
@@ -110,9 +126,9 @@ const VPN = () => {
           />
         </View>
       )}
-      <Block flex={false} padding={[SIZES.h3, 0]}>
+      <Block row flex={false} padding={[SIZES.h3, 0]}>
         <Text title semibold>
-          VPN
+          VPN Lite
         </Text>
       </Block>
       <Block center flex={false}>
@@ -211,5 +227,11 @@ const styles = StyleSheet.create({
     shadowRadius: SIZES.base / 2,
     backgroundColor: "#f76b1c",
     borderRadius: 50,
+  },
+  avatar: {
+    width: 35,
+    height: 35,
+    borderRadius: 35 / 2,
+    marginRight: 5,
   },
 });

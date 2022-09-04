@@ -7,6 +7,7 @@ import Welcome from "../screens/Welcome";
 import VPN from "../screens/VPN";
 import Signup from "../screens/Signup";
 import Login from "../screens/Login";
+import Profile from "../screens/Profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,10 +38,17 @@ const Navigation = () => {
           <Stack.Screen name="Signup" component={Signup} />
         </Stack.Navigator>
       ) : (
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="VPN">
           <Stack.Screen
             name="VPN"
             component={VPN}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
             options={{
               headerShown: false,
             }}
