@@ -19,6 +19,8 @@ const VPN = () => {
     name: "Automatic",
     icon: icons.automatic,
   });
+  const [loader, setLoader] = useState(false);
+  const [temp, setTemp] = useState(false);
 
   function handleConnect() {
     setConnected(!connected);
@@ -90,7 +92,7 @@ const VPN = () => {
   return (
     <Block safe center space="between" style={{ backgroundColor: "#fad860" }}>
       {/* <BackButton goBack={() => navigation.goBack()} /> */}
-      {!connected && (
+      {loader && (
         <View style={{ position: "absolute", top: 347.5 }}>
           <CircularProgress
             radius={99}
@@ -102,7 +104,9 @@ const VPN = () => {
             inActiveStrokeOpacity={0.2}
             inActiveStrokeWidth={6}
             duration={3000}
-            onAnimationComplete={() => handleConnect()}
+            onAnimationComplete={() => {
+              setLoader(false), setTemp(true);
+            }}
           />
         </View>
       )}
@@ -123,19 +127,19 @@ const VPN = () => {
           padding={[SIZES.base, SIZES.padding]}
         >
           <Text theme={theme} subtitle semibold gray height={SIZES.h3}>
-            {connected ? "Connected" : "Disconnected"}
+            {temp ? "Connected" : "Disconnected"}
           </Text>
           <Block
             flex={false}
             radius={SIZES.base}
             style={styles.status}
-            color={connected ? COLORS.success : rgba(COLORS.gray, 0.5)}
+            color={temp ? COLORS.success : rgba(COLORS.gray, 0.5)}
           />
         </Block>
 
         <Image
           style={styles.image}
-          source={icons[connected ? "online" : "offline"]}
+          source={icons[temp ? "online" : "offline"]}
         />
 
         <Button
@@ -146,7 +150,15 @@ const VPN = () => {
             connected && styles.connected,
             { backgroundColor: "#f76b1c" },
           ]}
-          onPress={() => handleConnect()}
+          onPress={() => {
+            setConnected(!connected);
+            if (connected === false) {
+              setLoader(true);
+            } else {
+              setLoader(false);
+              setTemp(false);
+            }
+          }}
         >
           <Text
             caption
